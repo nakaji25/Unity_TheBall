@@ -27,4 +27,29 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    //GOボタンを押した
+    public void PushGoButton()
+    {
+        //ボールの重力を有効化
+        Rigidbody2D rd = ball.GetComponent<Rigidbody2D>();
+        rd.isKinematic = false;
+
+        retryButton.SetActive(true); //リトライボタンを表示
+        goButton.SetActive(false); //GOボタンを非表示
+        isBallMoving = true; //ボールは「移動中」
+    }
+
+    //リトライボタンを押した
+    public void PushRetryButton()
+    {
+        Destroy(ball); //ボールオブジェトを削除
+
+        //プレハブより新しいボールオブジェクトを作成
+        ball = (GameObject)Instantiate(ballPrefab);
+
+        retryButton.SetActive(false); //リトライボタンを非表示
+        goButton.SetActive(true); //GOボタンを表示
+        isBallMoving = false; //ボールは「移動中ではない」
+    }
 }
