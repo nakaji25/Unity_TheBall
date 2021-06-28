@@ -15,11 +15,17 @@ public class GameManager : MonoBehaviour
     public GameObject retryButton; //ボタン：リトライ
     public GameObject clearText; //テキスト：クリア
 
+    public AudioClip clearSE; //効果音：クリア
+    private AudioSource audioSource; //オーディオソース
+
     // Start is called before the first frame update
     void Start()
     {
         retryButton.SetActive(false); //リトライボタンを非表示
         isBallMoving = false; //ボールは「移動中ではない」
+
+        //オーディオソースを取得
+        audioSource = gameObject.GetComponent<AudioSource>();
 
     }
 
@@ -54,9 +60,16 @@ public class GameManager : MonoBehaviour
         isBallMoving = false; //ボールは「移動中ではない」
     }
 
+    //バックボタンを押した
+    public void PushBackButton()
+    {
+
+    }
+
     //ステージクリア処理
     public void StageClear()
     {
+        audioSource.PlayOneShot(clearSE); //クリア音再生
         clearText.SetActive(true); //クリア表示
         retryButton.SetActive(false); //リトライボタン表示
 
