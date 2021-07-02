@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public int StageNo; //ステージナンバー
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
     //バックボタンを押した
     public void PushBackButton()
     {
-
+        GobackStageSelect();
     }
 
     //ステージクリア処理
@@ -73,5 +75,11 @@ public class GameManager : MonoBehaviour
         clearText.SetActive(true); //クリア表示
         retryButton.SetActive(false); //リトライボタン表示
 
+    }
+
+    //移動処理
+    void GobackStageSelect()
+    {
+        SceneManager.LoadScene("StageSelectScene");
     }
 }
