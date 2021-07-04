@@ -72,9 +72,17 @@ public class GameManager : MonoBehaviour
     public void StageClear()
     {
         audioSource.PlayOneShot(clearSE); //クリア音再生
+        //セーブデータ更新
+        if (PlayerPrefs.GetInt("CLEAR", 0) < StageNo)
+        {
+            //セーブされているステージNoより今のステージNoが大きければ
+            PlayerPrefs.SetInt("CLEAR", StageNo); //ステージナンバーを記録
+        }
         clearText.SetActive(true); //クリア表示
         retryButton.SetActive(false); //リトライボタン表示
 
+        //3秒後に自動的にステージセレクト画面へ
+        Invoke("GobackStageSelect", 3.0f);
     }
 
     //移動処理
